@@ -1,0 +1,75 @@
+/* Rose Pine Moon neon theme, restored from the 2026-01 desktop palette. */
+* {
+  font-family:
+    "Monaspace Radon Var", "Annotation Mono", "Symbols Nerd Font",
+    "0xProto Nerd Font Mono", "0xProto Nerd Font", "Noto Sans CJK JP", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+window#waybar {
+  background-color: transparent;
+  color: #e0def4;
+  padding: 2px 5px;
+}
+
+tooltip {
+  background: rgba(35, 33, 54, 0.92);
+  border: 1px solid #c4a7e7;
+  border-radius: 10px;
+  box-shadow: none;
+}
+
+tooltip label { color: #e0def4; text-shadow: none; }
+
+#workspaces, #window, #submap, #mpris, #clock, #battery, #network,
+#pulseaudio, #bluetooth, #temperature, #tray, #custom-notification,
+#custom-tlp, #custom-niri-windows, #custom-niri-ratio, #custom-hypr-windows {
+  background-color: rgba(42, 39, 63, 0.72);
+  border: 1px solid #44415a;
+  border-radius: 10px;
+  box-shadow: none;
+  margin: 3px 2px 0;
+  padding: 0 12px;
+  text-shadow: none;
+}
+
+#workspaces {
+  border-color: #9ccfd8;
+  margin-left: 4px;
+  padding: 0 4px;
+}
+
+#workspaces button {
+  background: transparent;
+  border: 0;
+  border-radius: 7px;
+  box-shadow: none;
+  color: #908caa;
+  margin: 2px 0;
+  padding: 0 6px;
+  transition: none;
+}
+
+#workspaces button:hover { background: #393552; color: #e0def4; }
+#workspaces button.active { background: rgba(196, 167, 231, 0.22); color: #c4a7e7; }
+#workspaces button.urgent { background: rgba(235, 111, 146, 0.22); color: #eb6f92; }
+
+#window, #mpris { border-color: #ea9a97; color: #ea9a97; font-weight: 700; }
+#custom-niri-windows, #custom-hypr-windows, #submap { border-color: #f6c177; color: #f6c177; }
+#custom-niri-ratio { border-color: #ebbcba; color: #ebbcba; }
+#clock { border-color: #c4a7e7; color: #c4a7e7; font-weight: 700; }
+#pulseaudio { border-color: #9ccfd8; color: #9ccfd8; }
+#bluetooth { border-color: #c4a7e7; color: #c4a7e7; }
+#network { border-color: #9ccfd8; color: #9ccfd8; }
+#battery { border-color: #f6c177; color: #f6c177; }
+#temperature { border-color: #ebbcba; color: #ebbcba; }
+#custom-notification { border-color: #e0def4; color: #e0def4; margin-right: 4px; }
+#custom-tlp { border-color: #f6c177; color: #f6c177; }
+
+#pulseaudio.muted, #network.disconnected { color: #6e6a86; text-decoration: line-through; }
+#battery.warning { border-color: #f6c177; color: #f6c177; }
+#temperature.critical, #battery.critical:not(.charging) { border-color: #eb6f92; color: #eb6f92; }
+
+#tray { padding: 0 8px; }
+#tray > * { margin: 0 6px; }

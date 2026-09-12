@@ -1,0 +1,53 @@
+[language-server.moonbit-lsp]
+command = "moonbit-lsp"
+
+[[language]]
+name = "moonbit"
+scope = "source.moonbit"
+injection-regex = "moonbit"
+file-types = ["mbt"]
+comment-tokens = "//"
+indent = { tab-width = 2, unit = "  " }
+language-servers = ["moonbit-lsp"]
+roots = ["moon.mod.json"]
+formatter = { command = "moon", args = ["fmt"] }
+
+[[language]]
+name = "bash"
+formatter = { command = "shfmt", args = ["-i", "2"] }
+auto-format = true
+
+[[language]]
+name = "nix"
+formatter = { command = "nixfmt" }
+auto-format = true
+
+[[language]]
+name = "lua"
+formatter = { command = "stylua", args = [
+  "--column-width", "100",
+  "--indent-type", "Spaces",
+  "--indent-width", "2",
+  "--quote-style", "AutoPreferDouble",
+  "--collapse-simple-statement", "Always",
+  "--stdin-filepath", "%{buffer_name}",
+  "-",
+] }
+auto-format = true
+
+[[language]]
+name = "astro"
+file-types = ["astro"]
+roots = ["package.json", "astro.config.mjs"]
+language-servers = ["astro-ls"]
+auto-format = true
+formatter = { command = "npx", args = ["prettier", "--plugin", "prettier-plugin-astro", "--stdin-filepath", "file.astro"] }
+
+[[language]]
+name = "css"
+formatter = { command = "biome", args = ["format", "--stdin-file-path", "%{buffer_name}"] }
+auto-format = true
+
+[[grammar]]
+name = "moonbit"
+source = { git = "https://github.com/moonbitlang/tree-sitter-moonbit", rev = "main" }

@@ -1,0 +1,5 @@
+require("config.config")
+require("config.keymap")
+require("config.smartchr")
+require("config.org")
+require("config.lazy")

@@ -1,0 +1,120 @@
+## Overview (Gallery)
+
+## Installation & Setup
+
+- *NixOS* (Full system + user management)
+- *Standalone Home Manager* (User management on generic Linux distros like Debian/Ubuntu)
+
+### Standalone Home Manager
+
+Set `userNames.standalone` near the top of `flake.nix` to your login name,
+clone this repository to `~/dotfiles`, and run the bootstrap
+script. It installs the Fedora-owned system layer (`fish` and `niri`), installs
+Nix when necessary, builds the flake, and activates standalone Home Manager.
+
+```bash
+git clone <repository-url> ~/dotfiles
+cd ~/dotfiles
+./script/fedora-home-manager-bootstrap.sh
+```
+
+The repository path is intentional: the configuration derives its out-of-store
+links from `/home/<userName>/dotfiles`. NixOS usernames are configured per host
+by `userNames.desktop` and `userNames.thinkpad`. After the first run, log out and back
+in. Subsequent updates use:
+
+```bash
+home-manager switch --flake ".#$USER"
+```
+
+### NixOS
+
+There are two Linux hosts, each with its own hardware config:
+
+| Host | Directory | Hostname | Notes |
+| :---: | :--- | :---: | :--- |
+| ThinkPad | `hosts/thinkpad/` | `selinoir` | AMD, fingerprint, lid/hibernate |
+| Desktop | `hosts/desktop/` | `selipaq` | Intel, LUKS swap |
+
+Machine-specific settings live in the host directory; shared desktop setup lives in `modules/desktop.nix`.
+
+#### Initial Setup (per host)
+
+Clone this repo to `~/dotfiles`, then generate and copy the hardware configuration:
+
+```bash
+sudo nixos-generate-config --dir /etc/nixos
+sudo cp /etc/nixos/hardware-configuration.nix ~/dotfiles/hosts/thinkpad/
+sudo cp /etc/nixos/hardware-configuration.nix ~/dotfiles/hosts/desktop/
+# pick the directory matching the machine, then commit the new UUIDs
+```
+
+#### Apply Configuration
+
+```bash
+cd ~/dotfiles
+sudo nixos-rebuild switch --flake .#thinkpad   # on the ThinkPad
+sudo nixos-rebuild switch --flake .#desktop    # on the desktop
+```
+
+## Structure (simple)
+
+```text
+~/dotfiles
+├── flake.nix
+├── hosts/
+│   ├── thinkpad/
+│   │   ├── configuration.nix   # selinoir (AMD, fingerprint, lid/hibernate)
+│   │   └── hardware-configuration.nix
+│   ├── desktop/
+│   │   ├── configuration.nix   # selipaq (Intel desktop)
+│   │   └── hardware-configuration.nix
+├── modules/
+│   ├── common.nix
+│   ├── desktop.nix
+│   └── thinkpad.nix
+├── home/
+│   ├── seli.nix
+│   ├── common_user.nix
+│   └── ...
+├── nvim/
+├── kitty/
+├── hypr/
+├── waybar/
+└── ...
+```
+
+- `hosts/<name>/configuration.nix`: per-machine settings (hostname, hardware-specific bits)
+- `modules/desktop.nix`: system-wide desktop infrastructure shared by all NixOS hosts (Hyprland/niri, PipeWire, portal, polkit, etc.)
+- `home/seli.nix`: personal apps and user config
+- real app config files stay in this dotfiles repo as normal files/directories
+- Home Manager deploys `~/.config/*` via `xdg.configFile` symlinks
+
+## Maintenance & Updates
+
+After making changes to your configuration files, use the following commands to apply them.
+
+### Rebuild (Apply Changes)
+
+**Standalone Linux (Debian, Ubuntu, etc.)**
+
+```bash
+cd ~/dotfiles
+home-manager switch --flake ".#$USER"
+```
+
+**NixOS**
+```bash
+cd ~/dotfiles
+sudo nixos-rebuild switch --flake .#thinkpad   # on the ThinkPad
+sudo nixos-rebuild switch --flake .#desktop    # on the desktop
+```
+
+### Update Packages (Flake Inputs)
+
+To update the underlying packages (nixpkgs, etc.) to their latest versions:
+```bash
+cd ~/dotfiles
+nix flake update
+# Then run the appropriate rebuild command above
+```

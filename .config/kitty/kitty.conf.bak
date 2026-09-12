@@ -1,0 +1,36 @@
+font_size 11.5
+modify_font cell_height 110%
+modify_font cell_width 100%
+enable_audio_bell yes
+
+tab_bar_edge top
+tab_bar_margin_width 6
+tab_bar_margin_height 4.0 4.0
+tab_bar_align left
+tab_powerline_style round
+tab_separator " / "
+tab_activity_symbol '!'
+tab_bar_style powerline
+
+include themes/rose-pine-moon.conf
+
+background_opacity 0.96
+background_blur 6
+
+scrollbar hovered
+
+# BEGIN_KITTY_FONTS
+font_family      family="Annotation Mono"
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+# END_KITTY_FONTS
+
+map ctrl+shift+t new_tab_with_cwd
+map ctrl+shift+enter new_tab_with_cwd
+map ctrl+shift+, load_config_file
+
+notify_on_cmd_finish unfocused 5.0
+allow_remote_control yes
+enabled_layouts splits
+listen_on unix:/tmp/mykitty

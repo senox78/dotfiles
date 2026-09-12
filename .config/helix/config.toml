@@ -1,0 +1,95 @@
+theme = "rose_pine_moon_transparent"
+
+[editor]
+auto-info = true
+bufferline = "always"
+line-number = "relative"
+#mouse = true
+shell = ["bash", "-c"]
+# clipboard-provider = "tmux"
+true-color = true
+rulers = [100, 120]
+# preview-completion-insert = false
+color-modes = true
+trim-trailing-whitespace = false
+
+[editor.file-picker]
+hidden = false
+ignore = true
+
+[editor.statusline]
+center = ["file-type"]
+mode.normal = "NORMAL"
+mode.insert = "INSERT"
+mode.select = "SELECT"
+
+[editor.lsp]
+display-inlay-hints = true
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.auto-save]
+after-delay.enable = true
+after-delay.timeout = 800
+
+[editor.whitespace.render]
+space = "none"
+tab = "all"
+nbsp = "all"
+nnbsp = "all"
+newline = "none"
+
+[editor.whitespace.characters]
+space = "·"
+nbsp = "⍽"
+nnbsp = "␣"
+tab = "→"
+newline = "↵"
+tabpad = "·"
+
+[editor.indent-guides]
+render = true
+character = "|"
+skip-levels = 1
+
+[editor.soft-wrap]
+enable = true
+
+[editor.inline-diagnostics]
+cursor-line = "hint"
+
+[keys.normal]
+C-s = ":w"
+C-r = ":reload"
+"0" = "goto_line_start"
+"$" = "goto_line_end"
+"G" = "goto_file_end"
+"A" = "insert_at_line_end"
+"V" = ["goto_line_start", "select_mode"]
+"C-e" = ":pipe-to tmux send-keys -t ! \"$(cat)\" Enter"
+
+[keys.normal.g]
+g = "goto_file_start"
+c = "toggle_comments"
+t = "goto_next_buffer"
+T = "goto_previous_buffer"
+
+[keys.normal.Z]
+Z = ":wqa"
+
+[keys.select]
+y = [":pipe-to tmux load-buffder -", "yank"]
+# z = ["shrink_to_line_bounds"]
+
+[keys.insert]
+C-r = ":reload"
+C-h = "move_char_left"
+C-j = "move_visual_line_down"
+C-k = "move_visual_line_up"
+C-l = "move_char_right"
+
+[keys.insert.j]
+j = "normal_mode"

@@ -1,0 +1,41 @@
+[[mgr.prepend_keymap]]
+on = ["z"]
+run = '''
+shell --confirm --block -- sh -c '
+p=$1
+
+if [ -d "$p" ]; then
+    name=${p##*/}
+    cd -- "$(dirname "$p")" &&
+    zip -r "$name.zip" "$name"
+elif [ -f "$p" ] && [ "${p##*.}" = zip ]; then
+    unzip -d "${p%.zip}" -- "$p"
+fi
+' sh %h
+'''
+desc = "Zip/Unzip toggle"
+
+[[mgr.prepend_keymap]]
+on = ["<C-y>"]
+run = "plugin gui-copy -- uri"
+desc = "Copy to GUI clipboard as file:// URI (for browser upload drop zones)"
+
+[[mgr.prepend_keymap]]
+on = ["<A-y>"]
+run = "plugin gui-copy -- auto"
+desc = "Copy to GUI clipboard: content, or file:// URI if not pasteable"
+
+[[mgr.prepend_keymap]]
+on = ["g", "z"]
+run = "plugin fzf"
+desc = "Jump to a file/directory via fzf"
+
+[[mgr.prepend_keymap]]
+on = ["g", "Z"]
+run = "plugin zoxide"
+desc = "Jump to a directory via zoxide"
+
+[[mgr.prepend_keymap]]
+on = ["Z"]
+run = "noop"
+desc = "Disable default zoxide key"

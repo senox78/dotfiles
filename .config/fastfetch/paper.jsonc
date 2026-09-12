@@ -1,0 +1,106 @@
+// Uncoated Paper theme — see README/PaperDesign.md
+//
+// paper rules applied here:
+// - no rounded corners, no capsule boxes: sections are separated by thin
+//   horizontal rules only
+// - one accent: title uses rose (#d38ca0); everything else is ink / muted
+// - keys are ink-muted (#77766d), rules are rule (#b7b0a2)
+// - values use the terminal foreground (ink on the paper palette)
+// - no colors swatch module, no per-module colors, no Powerline symbols
+
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
+  "logo": {
+    "type": "none"
+  },
+
+  "display": {
+    "separator": "  ",
+    "color": {
+      "keys": "#77766d",
+      "title": "#d38ca0",
+      "separator": "#b7b0a2"
+    }
+  },
+
+  "modules": [
+    {
+      "type": "title",
+      "format": "{#title}{user-name}{#keys} @ {#title}{host-name}"
+    },
+    {
+      "type": "custom",
+      "format": "{#separator}────────────────────────────────────────"
+    },
+
+    {
+      "type": "custom",
+      "format": "{#keys}System"
+    },
+    {
+      "type": "os",
+      "key": "  OS      "
+    },
+    {
+      "type": "kernel",
+      "key": "  Kernel  "
+    },
+    {
+      "type": "uptime",
+      "key": "  Uptime  "
+    },
+    {
+      "type": "packages",
+      "key": "  Packages"
+    },
+
+    "break",
+
+    {
+      "type": "custom",
+      "format": "{#keys}Desktop"
+    },
+    {
+      "type": "wm",
+      "key": "  WM      "
+    },
+    {
+      "type": "shell",
+      "key": "  Shell   "
+    },
+    {
+      "type": "terminal",
+      "key": "  Terminal"
+    },
+
+    "break",
+
+    {
+      "type": "custom",
+      "format": "{#keys}Hardware"
+    },
+    {
+      "type": "cpu",
+      "key": "  CPU     "
+    },
+    {
+      "type": "gpu",
+      "key": "  GPU     "
+    },
+    {
+      "type": "memory",
+      "key": "  Memory  "
+    },
+    {
+      "type": "disk",
+      "key": "  Disk /  ",
+      "folders": "/"
+    },
+
+    {
+      "type": "custom",
+      "format": "{#separator}────────────────────────────────────────"
+    }
+  ]
+}

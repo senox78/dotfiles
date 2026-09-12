@@ -1,0 +1,190 @@
+/**
+ * Uncoated Paper - Rofi Theme
+ *
+ * Follows README/PaperDesign.md: opaque paper surfaces, no radius,
+ * no shadow, no blur, state shown via ink/rose text and thin rules.
+ */
+
+* {
+    paper:       #f1eee5;
+    paper-light: #fbf9f2;
+    ink:         #2d302b;
+    ink-muted:   #77766d;
+    rule:        #b7b0a2;
+    rule-soft:   #d0c9bb;
+    rose:        #d38ca0;
+    rose-wash:   #ead2d9;
+    warning:     #a84435;
+
+    font: "Monaspace Radon Var 13";
+
+    background-color: @paper;
+    text-color:       @ink;
+    spacing:  0;
+    margin:   0;
+    padding:  0;
+}
+
+/* ── Outer window ──────────────────────────────────────────────── */
+window {
+    background-color: @paper;
+    border:           1px solid;
+    border-color:     @rule;
+    border-radius:    0px;
+    padding:          14px;
+    width:            620px;
+    location:         center;
+    anchor:           center;
+}
+
+/* ── Layout ────────────────────────────────────────────────────── */
+mainbox {
+    background-color: transparent;
+    spacing:          8px;
+    children:         [ inputbar, message, listview ];
+}
+
+/* ── Search bar ────────────────────────────────────────────────── */
+inputbar {
+    background-color: @paper-light;
+    border:           1px solid;
+    border-color:     @rule;
+    border-radius:    0px;
+    padding:          9px 14px;
+    spacing:          10px;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    background-color: transparent;
+    text-color:       @ink;
+    font:             "0xProto Nerd Font 14";
+}
+
+entry {
+    background-color: transparent;
+    text-color:       @ink;
+    placeholder:      "Search…";
+    placeholder-color: @ink-muted;
+    cursor:           text;
+}
+
+/* ── Mode-switcher ─────────────────────────────────────────────── */
+mode-switcher {
+    background-color: @paper-light;
+    border:           1px solid;
+    border-color:     @rule-soft;
+    border-radius:    0px;
+    padding:          4px;
+    spacing:          4px;
+}
+
+button {
+    background-color: transparent;
+    text-color:       @ink-muted;
+    border-radius:    0px;
+    padding:          6px 12px;
+}
+
+button selected {
+    background-color: transparent;
+    text-color:       @rose;
+    border:           0px 0px 2px 0px solid;
+    border-color:     @rose;
+}
+
+/* ── Message bar ───────────────────────────────────────────────── */
+message {
+    background-color: @paper-light;
+    border:           1px solid;
+    border-color:     @rule-soft;
+    border-radius:    0px;
+    padding:          8px 14px;
+}
+
+textbox {
+    background-color: transparent;
+    text-color:       @ink;
+}
+
+/* ── Result list ───────────────────────────────────────────────── */
+listview {
+    background-color: transparent;
+    spacing:          2px;
+    scrollbar:        true;
+    cycle:            true;
+    dynamic:          true;
+    layout:           vertical;
+}
+
+element {
+    background-color: transparent;
+    text-color:       @ink;
+    border:           0px 0px 0px 2px solid;
+    border-color:     transparent;
+    border-radius:    0px;
+    padding:          8px 12px;
+    spacing:          10px;
+    orientation:      horizontal;
+    children:         [ element-icon, element-text ];
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color:       @ink;
+    border-color:     transparent;
+}
+
+element normal.urgent {
+    background-color: transparent;
+    text-color:       @warning;
+    border-color:     @warning;
+}
+
+element normal.active {
+    background-color: transparent;
+    text-color:       @rose;
+    border-color:     @rule-soft;
+}
+
+/* Selected item → soft rose wash + rose rule, no heavy fill */
+element selected.normal {
+    background-color: @rose-wash;
+    text-color:       @ink;
+    border-color:     @rose;
+}
+
+element selected.urgent {
+    background-color: @rose-wash;
+    text-color:       @warning;
+    border-color:     @warning;
+}
+
+element selected.active {
+    background-color: @rose-wash;
+    text-color:       @rose;
+    border-color:     @rose;
+}
+
+element-icon {
+    background-color: transparent;
+    size:             24px;
+    cursor:           pointer;
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+    cursor:           pointer;
+    vertical-align:   0.5;
+    horizontal-align: 0.0;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────── */
+scrollbar {
+    background-color: transparent;
+    handle-color:     @rule;
+    border-radius:    0px;
+    handle-width:     4px;
+    padding:          0 2px;
+}

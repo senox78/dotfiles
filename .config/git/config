@@ -1,0 +1,42 @@
+[init]
+	defaultBranch = main
+[user]
+	name = senox78
+  email = senox78.am2@gmail.com
+[include]
+	path = ~/.config/git-signing.conf
+[core]
+	excludesfile = ~/.gitignore_global
+	pager = less
+
+[diff]
+	tool = difftastic
+	external = difft
+
+[difftool]
+	prompt = false
+
+[difftool "difftastic"]
+	cmd = difft --display inline "$LOCAL" "$REMOTE"
+
+[pager]
+	difftool = true
+
+[credential "https://github.com"]
+	helper =
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !gh auth git-credential
+
+[color]
+  ui = auto
+[color "status"]
+  modified = yellow
+  deleted = red
+[pull]
+	rebase = false
+[commit]
+	gpgsign = true
+[tag]
+	gpgSign = true

@@ -1,0 +1,60 @@
+{
+  "copyright": {
+    "prefix": "copyright",
+    "body": ["Copyright (c) ${CURRENT_YEAR} ${1:Uliboooo}. All Rights Reserved.$0"],
+    "description": "Copyright (c) 2026 Uliboooo. All Rights Reserved."
+  },
+  "copyright (commented)": {
+    "prefix": "copyrightc",
+    "body": [
+      "${LINE_COMMENT} Copyright (c) ${CURRENT_YEAR} ${1:Uliboooo}. All Rights Reserved.$0"
+    ],
+    "description": "コメント記号付きの copyright 行"
+  },
+  "spdx license id": {
+    "prefix": "spdx",
+    "body": ["${LINE_COMMENT} SPDX-License-Identifier: ${1:MIT}$0"],
+    "description": "// SPDX-License-Identifier: MIT"
+  },
+  "date": {
+    "prefix": "date",
+    "body": ["${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}"],
+    "description": "2026-07-22"
+  },
+  "datetime": {
+    "prefix": "datetime",
+    "body": [
+      "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE} ${CURRENT_HOUR}:${CURRENT_MINUTE}"
+    ],
+    "description": "2026-07-22 13:45"
+  },
+  "date iso8601": {
+    "prefix": "dateiso",
+    "body": [
+      "${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}T${CURRENT_HOUR}:${CURRENT_MINUTE}:${CURRENT_SECOND}${CURRENT_TIMEZONE_OFFSET}"
+    ],
+    "description": "2026-07-22T13:45:30+09:00"
+  },
+  "time": {
+    "prefix": "time",
+    "body": ["${CURRENT_HOUR}:${CURRENT_MINUTE}"],
+    "description": "13:45"
+  },
+  "epoch": {
+    "prefix": "epoch",
+    "body": ["${CURRENT_SECONDS_UNIX}"],
+    "description": "unix time (秒)"
+  },
+  "uuid": {
+    "prefix": "uuid",
+    "body": ["${UUID}"],
+    "description": "UUID v4"
+  },
+  "todo": {
+    "prefix": "todo",
+    "body": [
+      "${LINE_COMMENT} TODO(${1:uliboooo} ${CURRENT_YEAR}-${CURRENT_MONTH}-${CURRENT_DATE}): $0"
+    ],
+    "description": "日付入りの TODO コメント"
+  }
+}

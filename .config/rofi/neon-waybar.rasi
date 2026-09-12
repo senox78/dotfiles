@@ -1,0 +1,205 @@
+/**
+ * Neon Waybar Style - Rofi Theme
+ *
+ * Matches the waybar colored-border module aesthetic.
+ * Each UI section maps to a waybar module color:
+ *   Window/inputbar  → Pink   (#f5c2e7)  — matches waybar #window
+ *   Selected item    → Pink   (#f5c2e7)  — glowing selection
+ *   Mode switcher    → Green  (#a6e3a1)  — matches waybar #pulseaudio
+ *   Message bar      → Teal   (#89dceb)  — matches waybar #network
+ *   Outer border     → Mauve  (#cba6f7)  — matches waybar #clock
+ *   Urgent           → Red    (#f38ba8)  — matches waybar critical
+ */
+
+* {
+    /* Catppuccin Mocha base */
+    bg-base:       rgba(17, 17, 27, 0.92);
+    bg-module:     rgba(24, 24, 37, 0.60);
+    bg-selected:   rgba(137, 180, 250, 0.18);
+
+    /* Neon accents — mirrors waybar per-module borders */
+    neon-pink:     #f5c2e7;
+    neon-blue:     #89b4fa;
+    neon-mauve:    #cba6f7;
+    neon-green:    #a6e3a1;
+    neon-teal:     #89dceb;
+    neon-orange:   #fab387;
+    neon-red:      #f38ba8;
+    neon-lavender: #b4befe;
+
+    fg-text:       #cdd6f4;
+    fg-subtle:     #6c7086;
+
+    font:             "Monaspace Radon Var 13";
+
+    background-color: transparent;
+    text-color:       @fg-text;
+    spacing:  0;
+    margin:   0;
+    padding:  0;
+}
+
+/* ── Outer window (Mauve border = #clock) ──────────────────────── */
+window {
+    background-color: @bg-base;
+    border:           2px solid;
+    border-color:     @neon-mauve;
+    border-radius:    12px;
+    padding:          14px;
+    width:            620px;
+    location:         center;
+    anchor:           center;
+}
+
+/* ── Layout ────────────────────────────────────────────────────── */
+mainbox {
+    background-color: transparent;
+    spacing:          8px;
+    children:         [ inputbar, message, listview ];
+}
+
+/* ── Search bar (Pink border = #window) ────────────────────────── */
+inputbar {
+    background-color: @bg-module;
+    border:           1px solid;
+    border-color:     @neon-pink;
+    border-radius:    10px;
+    padding:          9px 14px;
+    spacing:          10px;
+    children:         [ prompt, entry ];
+}
+
+prompt {
+    background-color: transparent;
+    text-color:       @neon-pink;
+    font:             "0xProto Nerd Font 14";
+    /* Nerd Font for the mode icon; body text uses Monaspace Radon from * */
+}
+
+entry {
+    background-color: transparent;
+    text-color:       @fg-text;
+    placeholder:      "Search…";
+    placeholder-color: @fg-subtle;
+    cursor:           text;
+}
+
+/* ── Mode-switcher (Green border = #pulseaudio) ─────────────────── */
+mode-switcher {
+    background-color: @bg-module;
+    border:           1px solid;
+    border-color:     @neon-green;
+    border-radius:    10px;
+    padding:          4px;
+    spacing:          4px;
+}
+
+button {
+    background-color: transparent;
+    text-color:       @neon-green;
+    border-radius:    8px;
+    padding:          6px 12px;
+}
+
+button selected {
+    background-color: rgba(166, 227, 161, 0.18);
+    text-color:       @neon-pink;
+    border:           1px solid;
+    border-color:     @neon-pink;
+}
+
+/* ── Message bar (Teal border = #network) ───────────────────────── */
+message {
+    background-color: @bg-module;
+    border:           1px solid;
+    border-color:     @neon-teal;
+    border-radius:    10px;
+    padding:          8px 14px;
+}
+
+textbox {
+    background-color: transparent;
+    text-color:       @fg-text;
+}
+
+/* ── Result list ────────────────────────────────────────────────── */
+listview {
+    background-color: transparent;
+    spacing:          4px;
+    scrollbar:        true;
+    cycle:            true;
+    dynamic:          true;
+    layout:           vertical;
+}
+
+element {
+    background-color: transparent;
+    text-color:       @fg-text;
+    border:           1px solid;
+    border-color:     transparent;
+    border-radius:    10px;
+    padding:          8px 12px;
+    spacing:          10px;
+    orientation:      horizontal;
+    children:         [ element-icon, element-text ];
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color:       @fg-text;
+    border-color:     transparent;
+}
+
+element normal.urgent {
+    background-color: rgba(243, 139, 168, 0.12);
+    text-color:       @neon-red;
+    border-color:     @neon-red;
+}
+
+element normal.active {
+    background-color: rgba(137, 180, 250, 0.12);
+    text-color:       @neon-blue;
+    border-color:     @neon-blue;
+}
+
+/* Selected item → Pink border (= waybar #window active) */
+element selected.normal {
+    background-color: @bg-selected;
+    text-color:       @neon-pink;
+    border-color:     @neon-pink;
+}
+
+element selected.urgent {
+    background-color: rgba(243, 139, 168, 0.25);
+    text-color:       @neon-red;
+    border-color:     @neon-red;
+}
+
+element selected.active {
+    background-color: rgba(137, 180, 250, 0.25);
+    text-color:       @neon-blue;
+    border-color:     @neon-blue;
+}
+
+element-icon {
+    background-color: transparent;
+    size:             24px;
+    cursor:           pointer;
+}
+
+element-text {
+    background-color: transparent;
+    text-color:       inherit;
+    cursor:           pointer;
+    vertical-align:   0.5;
+    horizontal-align: 0.0;
+}
+
+/* ── Scrollbar ─────────────────────────────────────────────────── */
+scrollbar {
+    background-color: transparent;
+    handle-color:     @neon-mauve;
+    border-radius:    10px;
+    handle-width:     4px;
+    padding:          0 2px;
+}

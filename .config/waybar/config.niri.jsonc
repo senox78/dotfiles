@@ -1,0 +1,164 @@
+// -*- mode: jsonc -*-
+{
+  "layer": "top",
+  "position": "top",
+  "height": 32,
+  "spacing": 0,
+  "modules-left": [
+    "niri/workspaces",
+    "custom/niri-windows",
+    "custom/niri-ratio"
+  ],
+  "modules-center": ["mpris", "clock"],
+  "modules-right": [
+    "temperature",
+    "pulseaudio",
+    "bluetooth",
+    "network",
+    "battery",
+    "custom/tlp",
+    "custom/system-control",
+    "tray",
+    "custom/notification"
+  ],
+  "niri/workspaces": {
+    "format": "{value}",
+    "on-click": "activate",
+    "on-scroll-up": "niri msg action focus-workspace-up",
+    "on-scroll-down": "niri msg action focus-workspace-down",
+    "all-outputs": false,
+    "format-icons": {
+      "active": "",
+      "default": "",
+      "urgent": ""
+    }
+  },
+  "custom/niri-windows": {
+    "exec": "~/dotfiles/.config/waybar/scripts/niri-ws-windows.sh",
+    "return-type": "json",
+    "escape": false,
+    "tooltip": true
+  },
+  "custom/niri-ratio": {
+    "exec": "~/dotfiles/.config/waybar/scripts/niri-window-ratio.sh",
+    "return-type": "json",
+    "escape": false,
+    "tooltip": true
+  },
+  "niri/window": {
+    "format": "{app_id}",
+    "max-length": 40,
+    "separate-outputs": true,
+    "rewrite": {
+      "chromium-browser": " Chromium",
+      "ghostty": "󰊠 Ghostty",
+      "com.mitchellh.ghostty": "󰊠 Ghostty",
+      "com.obsproject.Studio": "󰻃 OBS-Studio",
+      "google-chrome": " Chrome",
+      "Google-chrome": " Chrome",
+      "firefox": " Firefox",
+      "kitty": "󰄛 Kitty",
+      "emacs": " Emacs",
+      "org.gnome.Nautilus": " Nautilus",
+      "^$": "󰇄 Desktop"
+    }
+  },
+  "mpris": {
+    "format": "󰎆 {artist} - {title}",
+    "format-paused": "󰏤 <i>{artist} / {title}</i>",
+    "max-length": 50,
+    "player-icons": {
+      "default": "󰎆"
+    }
+  },
+  "clock": {
+    "format": "{:%b %d %a %H:%M}",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": {
+      "mode": "month",
+      "on-scroll": 1,
+      "format": {
+        "months": "<span color='#d38ca0'><b>{}</b></span>",
+        "days": "<span color='#2d302b'>{}</span>",
+        "today": "<span color='#fbf9f2' background='#d38ca0'><b>{}</b></span>"
+      }
+    }
+  },
+  "temperature": {
+    "critical-threshold": 80,
+    "format-critical": "{icon} {temperatureC}°C",
+    "format": "{icon} {temperatureC}°C",
+    "format-icons": [""],
+    "interval": 10,
+    "on-click": "kitty --class=dev.float -e /etc/profiles/per-user/$USER/bin/btop"
+  },
+  "pulseaudio": {
+    "format": "{icon} {volume}%",
+    "format-muted": "󰝟 MUTED",
+    "reverse-mouse-scrolling": true,
+    "reverse-scrolling": true,
+    "format-icons": {
+      "default": ["󰕿", "󰖀", "󰕾"]
+    },
+    "on-click": "~/dotfiles/script/system_control.sh audio"
+  },
+  "bluetooth": {
+    "format": "{status}",
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias}",
+    "on-click": "~/dotfiles/script/system_control.sh bluetooth",
+    "tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+    "tooltip-format-connected": "{controller_alias}\t{controller_address}\n\n{num_connections} connected\n\n{device_enumerate}",
+    "tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+    "tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+  },
+  "network": {
+    "format-wifi": " {essid}",
+    "format-ethernet": "󰈀 ETH",
+    "format-disconnected": "󰖪 OFFLINE",
+    "max-length": 11,
+    "on-click": "~/dotfiles/script/system_control.sh wifi"
+  },
+  "battery": {
+    "states": {
+      "warning": 30,
+      "critical": 15
+    },
+    "format": "{icon}{capacity}%",
+    "format-charging": "󰂄 {capacity}%",
+    "format-plugged": " {capacity}%",
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "on-click": "~/dotfiles/script/system_control.sh brightness"
+  },
+  "custom/tlp": {
+    "exec": "~/dotfiles/script/tlp-waybar-status.sh",
+    "interval": 10,
+    "format": "󰌪 {}"
+  },
+  "custom/system-control": {
+    "format": "󰒓",
+    "tooltip": true,
+    "tooltip-format": "System controls",
+    "on-click": "~/dotfiles/script/system_control.sh"
+  },
+  "custom/notification": {
+    "tooltip": true,
+    "format": "<span size='13pt'>{icon}</span>",
+    "format-icons": {
+      "notification": "󱅫",
+      "none": "󰂜",
+      "dnd-notification": "󰂠",
+      "dnd-none": "󰪓",
+      "inhibited-notification": "󰂛",
+      "inhibited-none": "󰪑",
+      "dnd-inhibited-notification": "󰂛",
+      "dnd-inhibited-none": "󰪑"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  }
+}

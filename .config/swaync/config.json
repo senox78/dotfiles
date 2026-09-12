@@ -1,0 +1,36 @@
+{
+  "$schema": "/etc/xdg/swaync/configSchema.json",
+
+  "positionX": "right",
+  "positionY": "top",
+  "ignore-focused": false,
+
+  "layer": "overlay",
+  "control-center-layer": "top",
+
+  "notification-window-width": 360,
+  "control-center-width": 420,
+
+  "notification-margin-top": 10,
+  "notification-margin-right": 10,
+  "notification-margin-bottom": 10,
+
+  "timeout": 4,
+  "timeout-low": 4,
+  "timeout-critical": 0,
+
+  "fit-to-screen": true,
+  "hide-on-clear": true,
+  "hide-on-action": true,
+
+  "widgets": ["title", "dnd", "notifications"],
+
+  "widget-config": {
+    "title": {
+      "text": "notifications"
+    },
+    "dnd": {
+      "text": "do not disturb"
+    }
+  }
+}

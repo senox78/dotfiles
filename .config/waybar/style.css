@@ -1,0 +1,152 @@
+/* Quiet uncoated-paper Waybar theme. */
+* {
+  font-family:
+    "Monaspace Radon Var",
+    "Annotation Mono",
+    "Symbols Nerd Font",
+    "0xProto Nerd Font Mono",
+    "0xProto Nerd Font",
+    "Noto Sans CJK JP",
+    sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+window#waybar {
+  background-color: #f1eee5;
+  color: #2d302b;
+  border-bottom: 1px solid #b7b0a2;
+  padding: 0 12px;
+}
+
+tooltip {
+  background-color: #fbf9f2;
+  border: 1px solid #aaa394;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+tooltip label {
+  color: #2d302b;
+  padding: 4px 6px;
+  text-shadow: none;
+}
+
+#workspaces,
+#window,
+#submap,
+#mpris,
+#clock,
+#battery,
+#network,
+#pulseaudio,
+#bluetooth,
+#temperature,
+#tray,
+#custom-notification,
+#custom-system-control,
+#custom-tlp,
+#custom-niri-windows,
+#custom-hypr-windows {
+  background-color: transparent;
+  border: 0;
+  border-left: 1px solid #d0c9bb;
+  border-radius: 0;
+  box-shadow: none;
+  margin: 7px 0;
+  padding: 0 10px;
+  text-shadow: none;
+}
+
+#workspaces {
+  border-left: 0;
+  margin-left: 0;
+  padding-left: 0;
+  padding-right: 8px;
+}
+
+#workspaces button {
+  background-color: transparent;
+  background-image: none;
+  border: none;
+  border-image: none;
+  border-radius: 0;
+  box-shadow: none;
+  color: #77766d;
+  margin: 0;
+  min-width: 20px;
+  outline: none;
+  padding: 0 4px;
+  transition: none;
+}
+
+#workspaces button:hover {
+  background-color: transparent;
+  color: #2d302b;
+  box-shadow: none;
+}
+
+#workspaces button.active {
+  background-color: transparent;
+  color: #d38ca0;
+  box-shadow: none;
+  font-weight: 800;
+}
+
+#workspaces button.urgent {
+  background-color: transparent;
+  color: #8d332b;
+  box-shadow: none;
+  font-weight: 800;
+}
+
+#window,
+#custom-niri-windows,
+#custom-hypr-windows,
+#mpris {
+  color: #4e5149;
+}
+
+#submap {
+  background-color: transparent;
+  color: #a26a14;
+  font-weight: 700;
+  padding-left: 10px;
+}
+
+#clock {
+  color: #2d302b;
+  font-weight: 700;
+}
+
+#pulseaudio,
+#bluetooth,
+#network,
+#battery,
+#temperature,
+#custom-tlp,
+#custom-system-control,
+#custom-notification {
+  color: #4e5149;
+}
+
+#pulseaudio.muted,
+#network.disconnected {
+  color: #8a867c;
+  text-decoration: line-through;
+}
+
+#battery.warning,
+#temperature.critical,
+#battery.critical:not(.charging) {
+  color: #a84435;
+}
+
+#tray {
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+#tray > * {
+  margin: 0 5px;
+}

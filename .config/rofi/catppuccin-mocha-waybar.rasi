@@ -1,0 +1,189 @@
+/**
+ * Catppuccin Mocha - Waybar Style
+ * Matching the waybar design with rounded borders and semi-transparent backgrounds
+ */
+
+* {
+    // Catppuccin Mocha color palette
+    bg-base:        rgba(24, 24, 37, 0.92);     // Base background (higher opacity for main window)
+    bg-module:      rgba(24, 24, 37, 0.6);      // Module background (matches waybar modules)
+    bg-selected:    rgba(137, 180, 250, 0.2);   // Blue selection background
+    
+    fg-text:        #cdd6f4;                     // Text color
+    fg-pink:        #f5c2e7;                     // Pink accent (matches waybar window)
+    fg-blue:        #89b4fa;                     // Blue accent (matches waybar workspaces)
+    fg-mauve:       #cba6f7;                     // Mauve accent (matches waybar clock)
+    fg-overlay:     #6c7086;                     // Muted text
+    
+    border-color:   #cba6f7;                     // Mauve border
+    border-pink:    #f5c2e7;                     // Pink border
+    
+    background-color: transparent;
+    text-color: @fg-text;
+    
+    spacing: 0;
+    margin: 0;
+    padding: 0;
+}
+
+window {
+    background-color: @bg-base;
+    border: 1px solid;
+    border-color: @border-color;
+    border-radius: 10px;
+    padding: 12px;
+    width: 600px;
+    location: center;
+    anchor: center;
+}
+
+mainbox {
+    background-color: transparent;
+    spacing: 8px;
+    children: [ inputbar, message, listview ];
+}
+
+inputbar {
+    background-color: @bg-module;
+    text-color: @fg-pink;
+    border: 1px solid;
+    border-color: @border-pink;
+    border-radius: 10px;
+    padding: 8px 12px;
+    spacing: 8px;
+    children: [ prompt, entry ];
+}
+
+prompt {
+    background-color: transparent;
+    text-color: @fg-pink;
+    font: "0xProto Nerd Font 14";
+}
+
+entry {
+    background-color: transparent;
+    text-color: @fg-text;
+    placeholder: "Search...";
+    placeholder-color: @fg-overlay;
+    cursor: text;
+}
+
+message {
+    background-color: @bg-module;
+    border: 1px solid;
+    border-color: @fg-blue;
+    border-radius: 10px;
+    padding: 8px 12px;
+}
+
+textbox {
+    background-color: transparent;
+    text-color: @fg-text;
+}
+
+listview {
+    background-color: transparent;
+    spacing: 4px;
+    scrollbar: true;
+    cycle: true;
+    dynamic: true;
+    layout: vertical;
+}
+
+element {
+    background-color: transparent;
+    text-color: @fg-text;
+    border: 1px solid;
+    border-color: transparent;
+    border-radius: 10px;
+    padding: 8px 12px;
+    spacing: 8px;
+    orientation: horizontal;
+    children: [ element-icon, element-text ];
+}
+
+element normal.normal {
+    background-color: transparent;
+    text-color: @fg-text;
+    border-color: transparent;
+}
+
+element normal.urgent {
+    background-color: rgba(243, 139, 168, 0.15);
+    text-color: #f38ba8;
+    border-color: #f38ba8;
+}
+
+element normal.active {
+    background-color: rgba(137, 180, 250, 0.15);
+    text-color: @fg-blue;
+    border-color: @fg-blue;
+}
+
+element selected.normal {
+    background-color: @bg-selected;
+    text-color: @fg-pink;
+    border-color: @border-pink;
+}
+
+element selected.urgent {
+    background-color: rgba(243, 139, 168, 0.3);
+    text-color: #f38ba8;
+    border-color: #f38ba8;
+}
+
+element selected.active {
+    background-color: rgba(137, 180, 250, 0.3);
+    text-color: @fg-blue;
+    border-color: @fg-blue;
+}
+
+element-icon {
+    background-color: transparent;
+    size: 24px;
+    cursor: pointer;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    cursor: pointer;
+    vertical-align: 0.5;
+    horizontal-align: 0.0;
+}
+
+element-text selected {
+    text-color: @fg-pink;
+}
+
+scrollbar {
+    background-color: transparent;
+    handle-color: @fg-overlay;
+    border-radius: 10px;
+    handle-width: 4px;
+    padding: 0 2px;
+}
+
+// Mode switcher styling (for dmenu mode)
+mode-switcher {
+    background-color: @bg-module;
+    border: 1px solid;
+    border-color: @fg-blue;
+    border-radius: 10px;
+    padding: 4px;
+    spacing: 4px;
+}
+
+button {
+    background-color: transparent;
+    text-color: @fg-blue;
+    border-radius: 8px;
+    padding: 6px 10px;
+}
+
+button selected {
+    background-color: rgba(137, 180, 250, 0.2);
+    text-color: @fg-pink;
+    border: 1px solid;
+    border-color: @border-pink;
+}

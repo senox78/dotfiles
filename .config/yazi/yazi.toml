@@ -1,0 +1,41 @@
+[mgr]
+radio = [3, 3, 4]
+sort_by = "mtime"
+linemode = "size"
+show_hidden = false
+show_symlink = true
+sort_reverse = true
+enter = "enter"
+sort_dir_first = false
+
+[[manager.prepend_rules]]
+name = ".git/"
+use = false
+
+[plugin]
+prepend_previewers = [{ url = "*.wav", run = "wav-transcribe" }]
+
+[opener]
+pdf = [
+  { run = "zathura %s", orphan = true, desc = "Zathura" },
+  { run = "chromium %s", orphan = true, desc = "Chromium" },
+  { run = "firefox %s", orphan = true, desc = "Firefox" },
+]
+
+image = [
+  { run = "loupe %s1", orphan = true, desc = "Loupe" },
+  { run = "chromium %s", orphan = true, desc = "Chromium" },
+]
+
+html = [
+  { run = "chromium %s", orphan = true, desc = "Chromium" },
+  { run = "firefox %s", orphan = true, desc = "Firefox" },
+]
+
+[open]
+prepend_rules = [
+  { mime = "application/pdf", use = "pdf" },
+  { mime = "image/*", use = "image" },
+  { mime = "text/html", use = "html" },
+  { url = "*.html", use = "html" },
+]

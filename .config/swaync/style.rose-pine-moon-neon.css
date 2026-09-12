@@ -1,0 +1,104 @@
+/* Rose Pine Moon neon theme, restored from the 2026-01 SwayNC palette. */
+:root {
+  --cc-bg: #232136;
+  --noti-border-color: #c4a7e7;
+  --noti-bg: 42, 39, 63;
+  --noti-bg-alpha: 0.92;
+  --noti-bg-darker: #232136;
+  --noti-bg-hover: #393552;
+  --noti-bg-focus: #393552;
+  --noti-close-bg: transparent;
+  --noti-close-bg-hover: rgba(235, 111, 146, 0.2);
+  --text-color: #e0def4;
+  --text-color-disabled: #6e6a86;
+  --bg-selected: #c4a7e7;
+  --border: 1px solid #44415a;
+  --border-radius: 10px;
+  --notification-shadow: none;
+  --mpris-album-art-overlay: #2a273f;
+  --mpris-button-hover: #393552;
+  --mpris-album-art-shadow: none;
+}
+
+* {
+  font-family: "Annotation Mono", "0xProto Nerd Font Mono", "0xProto Nerd Font", "Noto Sans CJK JP", sans-serif;
+  color: #e0def4;
+  font-size: 13px;
+  font-weight: 600;
+  min-height: 0;
+}
+
+.notification {
+  background-color: rgba(42, 39, 63, 0.92);
+  border: 1px solid #c4a7e7;
+  border-radius: 10px;
+  box-shadow: none;
+  color: #e0def4;
+  margin: 8px;
+  padding: 12px;
+}
+
+.notification.critical { border-color: #eb6f92; }
+.notification.low { border-color: #9ccfd8; }
+.summary { color: #c4a7e7; font-size: 14px; font-weight: 800; }
+.body { color: #e0def4; margin-top: 4px; }
+.time { color: #908caa; font-size: 11px; }
+
+.close-button {
+  background: transparent;
+  border: 0;
+  border-radius: 6px;
+  box-shadow: none;
+  color: #908caa;
+}
+.close-button:hover { background: rgba(235, 111, 146, 0.2); color: #eb6f92; }
+
+.control-center {
+  background-color: rgba(35, 33, 54, 0.96);
+  border: 1px solid #c4a7e7;
+  border-radius: 10px;
+  box-shadow: none;
+  color: #e0def4;
+  margin: 10px;
+  padding: 16px;
+}
+.control-center-list { background: transparent; }
+.widget-title { color: #c4a7e7; font-size: 18px; font-weight: 800; margin: 8px; }
+
+.widget-title > button, button {
+  background: rgba(42, 39, 63, 0.72);
+  border: 1px solid #44415a;
+  border-radius: 8px;
+  box-shadow: none;
+  color: #e0def4;
+  padding: 6px 12px;
+}
+.widget-title > button:hover, button:hover { background: #393552; border-color: #c4a7e7; color: #c4a7e7; }
+
+.widget-dnd { color: #9ccfd8; font-size: 14px; margin: 8px; }
+.widget-dnd > switch {
+  background: #2a273f;
+  border: 1px solid #44415a;
+  border-radius: 10px;
+  box-shadow: none;
+}
+.widget-dnd > switch:checked { background: #9ccfd8; border-color: #9ccfd8; }
+.widget-dnd > switch slider {
+  background: #e0def4;
+  border: 0;
+  border-radius: 9px;
+  box-shadow: none;
+  min-height: 18px;
+  min-width: 18px;
+}
+.widget-label > label { color: #908caa; font-size: 12px; }
+
+.widget-mpris .widget-mpris-player {
+  background: #2a273f;
+  border: 1px solid #44415a;
+  border-radius: 10px;
+  box-shadow: none;
+}
+.widget-mpris .widget-mpris-player .mpris-background { filter: none; }
+.widget-mpris .widget-mpris-player .mpris-overlay { background: #2a273f; color: #e0def4; }
+.widget-mpris .widget-mpris-player .mpris-overlay .widget-mpris-album-art { border-radius: 8px; box-shadow: none; }
