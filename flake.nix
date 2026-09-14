@@ -40,6 +40,7 @@
 
     niri-scratchpad = {
       url = "github:argosnothing/niri-scratchpad-rs";
+      inputs.nixpkgs.follows = "nixpkgs";
     };
 
     nur = {
