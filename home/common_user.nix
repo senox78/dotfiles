@@ -287,7 +287,7 @@ in
           extraConfig = "set -g @rose_pine_variant 'dawn'";
         }
       ];
-      extraConfig = builtins.readFile ../.tmux.conf;
+      extraConfig = "source-file ~/.config/tmux/.tmux.conf";
     };
 
     programs.emacs = {
@@ -333,6 +333,14 @@ in
 
     xdg.enable = true;
     xdg.configFile = {
+      # programs.tmux generates tmux/tmux.conf, so link the editable files
+      # individually instead of replacing its parent directory.
+      "tmux/.tmux.conf" = {
+        source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/.config/tmux/.tmux.conf";
+      };
+      "tmux/clipboard.sh" = {
+        source = config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/.config/tmux/clipboard.sh";
+      };
       "nvim" = {
         source = mkConfigLink "nvim";
         recursive = false;

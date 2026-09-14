@@ -202,7 +202,7 @@ blur {
 
 // Blur translucent terminal and Emacs surfaces; other windows remain opaque.
 window-rule {
-    match app-id=r#"^(neovide|kitty|com\.mitchellh\.ghostty|emacs)$"#
+    match app-id=r#"^(neovide|kitty|scratchpad-kitty|com\.mitchellh\.ghostty|emacs)$"#
     background-effect {
         blur true
     }
@@ -212,6 +212,14 @@ window-rule {
 window-rule {
     match title="Scratchpad Emacs"
     open-floating true
+}
+
+// Dedicated Kitty toggled by Super+Backslash.
+window-rule {
+    match app-id="scratchpad-kitty"
+    open-floating true
+    default-column-width { proportion 0.333333; }
+    default-window-height { proportion 0.6; }
 }
 
 // PiP remains opaque so the floating window follows Paper Design too.
@@ -296,9 +304,9 @@ binds {
     Super+V { toggle-window-floating; }
     Super+D { spawn-sh "rofi -show drun"; }
     Super+C { spawn-sh "swaync-client --toggle-panel"; }
-    // Toggle the dedicated floating Emacs frame. `emacs-scratch` is a separate
-    // process, so its buffers never mix with ordinary Emacs windows.
-    Super+Backslash { spawn "niri-scratchpad" "target" "--spawn" "emacs-scratch" "title" "Scratchpad Emacs"; }
+    // Toggle a dedicated floating Kitty. The other two bindings retain the
+    // dedicated Emacs scratchpad.
+    Super+Backslash { spawn "niri-scratchpad" "target" "--spawn" "kitty --class=scratchpad-kitty" "appid" "scratchpad-kitty"; }
     Super+bracketleft { spawn "niri-scratchpad" "target" "--spawn" "emacs-scratch" "title" "Scratchpad Emacs"; }
     Super+bracketright { spawn "niri-scratchpad" "target" "--spawn" "emacs-scratch" "title" "Scratchpad Emacs"; }
     Super+shift+D { spawn-sh "$HOME/dotfiles/script/niri_views.sh"; }
@@ -440,8 +448,8 @@ binds {
 
     Super+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
 
-    Alt+H repeat=true { spawn-sh "$HOME/dotfiles/script/scroll.sh left"; }
-    Alt+K repeat=true { spawn-sh "$HOME/dotfiles/script/scroll.sh up"; }
-    Alt+J repeat=true { spawn-sh "$HOME/dotfiles/script/scroll.sh down"; }
-    Alt+L repeat=true { spawn-sh "$HOME/dotfiles/script/scroll.sh right"; }
+    // Alt+H repeat=true { spawn-sh "$HOME/dotfiles/script/scroll.sh left"; }
+    // Alt+K repeat=true { spawn-sh "$HOME/dotfiles/script/scroll.sh up"; }
+    // Alt+J repeat=true { spawn-sh "$HOME/dotfiles/script/scroll.sh down"; }
+    // Alt+L repeat=true { spawn-sh "$HOME/dotfiles/script/scroll.sh right"; }
 }
