@@ -97,7 +97,9 @@ in
 
   services.fprintd.enable = true;
   security.pam.services = {
-    login.fprintAuth = lib.mkForce true;
+    # GDM runs gdm-fingerprint separately from gdm-password. Enabling
+    # pam_fprintd in the shared login stack blocks the password prompt.
+    login.fprintAuth = lib.mkForce false;
     sudo.fprintAuth = true;
     # hyprlock scans the sensor itself over fprintd's DBus API. Leaving
     # pam_fprintd in the stack (fprintAuth defaults to services.fprintd.enable)
