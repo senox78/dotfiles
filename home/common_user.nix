@@ -227,6 +227,12 @@ let
     thunderbird
   ];
 
+  # Keep small daily tools that Fedora's enabled repositories do not provide.
+  standaloneNixPackages = with pkgs; [
+    lazygit
+    yazi
+  ];
+
   mkConfigLink = name: config.lib.file.mkOutOfStoreSymlink "${dotfilesDir}/.config/${name}";
 in
 {
@@ -322,14 +328,16 @@ in
     # ===== packages =====
     # A standalone Fedora host owns day-to-day packages through DNF.  Keep this
     # list for NixOS, where it is part of the declarative system closure.
-    home.packages = lib.optionals (!standalone) (
-      packages
-      ++ graphicalPackages
-      ++ [
-        (lib.hiPrio emacsClient)
-        emacsScratch
-      ]
-    );
+    home.packages =
+      lib.optionals standalone standaloneNixPackages
+      ++ lib.optionals (!standalone) (
+        packages
+        ++ graphicalPackages
+        ++ [
+          (lib.hiPrio emacsClient)
+          emacsScratch
+        ]
+      );
 
     home.sessionVariables = {
       NPM_CONFIG_PREFIX = npmGlobalDir;

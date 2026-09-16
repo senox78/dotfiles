@@ -35,7 +35,6 @@ readonly -a PACKAGES=(
   gnupg2
   htop
   jq
-  lazygit
   man-db
   mediainfo
   neovim
@@ -45,7 +44,6 @@ readonly -a PACKAGES=(
   unzip
   vim
   wget
-  yazi
   zip
   zsh
 
