@@ -87,6 +87,8 @@ let
     neovim
     helix
     tree-sitter
+    zed-editor
+    kdePackages.kate
 
     # ===== TUI =====
     yazi

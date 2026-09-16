@@ -64,7 +64,7 @@
       linuxSystem = "x86_64-linux";
       userNames = {
         desktop = "rei";
-        thinkpad = "seli";
+        thinkpad = "rei";
         standalone = "rei";
       };
 
@@ -92,7 +92,7 @@
         home-manager.lib.homeManagerConfiguration {
           pkgs = mkPkgs system;
           modules = [
-            ./home/seli.nix
+            ./home/rei.nix
             (mkGitSigningConfig signingKey)
           ];
           extraSpecialArgs = {
@@ -149,7 +149,7 @@
               standalone = false;
             };
             home-manager.sharedModules = [ (mkGitSigningConfig gitSigningKeys.thinkpad) ];
-            home-manager.users.${userNames.thinkpad} = import ./home/seli.nix;
+            home-manager.users.${userNames.thinkpad} = import ./home/rei.nix;
           }
         ];
       };
@@ -187,7 +187,7 @@
               standalone = false;
             };
             home-manager.sharedModules = [ (mkGitSigningConfig gitSigningKeys.desktop) ];
-            home-manager.users.${userNames.desktop} = import ./home/seli.nix;
+            home-manager.users.${userNames.desktop} = import ./home/rei.nix;
           }
 
           # inputs.shojiwm.nixosModules.default

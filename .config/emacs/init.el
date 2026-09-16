@@ -384,9 +384,10 @@ soon as an emacsclient GUI frame is created."
       tab-line-separator " "
       tab-line-tab-name-function #'seli/tab-line-buffer-name)
 
-(menu-bar-mode -1)
+(menu-bar-mode 1)
 (when (fboundp 'tool-bar-mode)
-  (tool-bar-mode -1))
+  (setq tool-bar-style 'image)
+  (tool-bar-mode 1))
 (tab-bar-mode 1)
 (global-tab-line-mode -1)
 

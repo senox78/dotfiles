@@ -130,7 +130,6 @@ in
 {
   # ===== desktop base (entire system) =====
   services.desktopManager.gnome.enable = true;
-  services.desktopManager.plasma6.enable = true;
   services.xserver.desktopManager.xfce.enable = true;
   services.displayManager.defaultSession = "niri";
   # Use GNOME's helper, which matches the gnome-keyring SSH-agent configuration.
@@ -300,9 +299,8 @@ in
       wantedBy = [ "graphical-session.target" ];
     };
   };
-  # GNOME / Plasma / standalone Wayland sessions share GNOME Keyring as their
-  # Secret Service backend. GDM's PAM stack unlocks the login keyring below,
-  # including when Plasma is selected from the session chooser.
+  # GNOME and standalone Wayland sessions share GNOME Keyring as their Secret
+  # Service backend. GDM's PAM stack unlocks the login keyring below.
   services.gnome.gnome-keyring.enable = true;
   # unlock keyring by PAM relation when login
   # GDM 経由のログインでも login キーリングが解錠される。/etc/pam.d/gdm-password は
