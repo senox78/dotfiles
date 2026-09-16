@@ -65,7 +65,7 @@
       userNames = {
         desktop = "rei";
         thinkpad = "seli";
-        standalone = "seli";
+        standalone = "rei";
       };
 
       gitSigningKeys = {
