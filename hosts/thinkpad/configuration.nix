@@ -186,7 +186,10 @@ in
   # bootloader configurations for UEFI
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  # linuxPackages_latest (7.2.5) repeatedly loses the DMUB command queue on
+  # this Rembrandt GPU during boot.  The installer/default kernel boots
+  # without the DMCUB flood, so keep this host on nixpkgs' tested default.
+  boot.kernelPackages = pkgs.linuxPackages;
 
   nix.settings.experimental-features = [
     "nix-command"
