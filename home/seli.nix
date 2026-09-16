@@ -3,6 +3,7 @@
   pkgs,
   lib,
   inputs,
+  standalone ? false,
   ...
 }:
 let
@@ -44,7 +45,9 @@ in
     setSessionVariables = false;
   };
 
-  home.packages = [
+  # TeX and herdr are retained in the NixOS closure.  Fedora projects should
+  # declare their exact versions in a devShell instead.
+  home.packages = lib.optionals (!standalone) [
     tex
     inputs.herdr.packages.${pkgs.system}.default
   ];

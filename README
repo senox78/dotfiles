@@ -22,12 +22,19 @@ The repository path is intentional: the configuration derives its out-of-store
 links from `/home/<userName>/dotfiles`. NixOS usernames are configured per host
 by `userNames.desktop` and `userNames.thinkpad`. On Fedora, the bootstrap installs
 the base graphical desktop applications with `dnf` so they use Fedora's GPU and
-Wayland stack; use `dnf` or Flatpak for additional GUI apps. Home Manager keeps
-dotfiles and development/CLI tools reproducible. After the first run, log out and
-back in. Subsequent updates use:
+Wayland stack. It also installs everyday CLI tools; project-specific toolchains
+belong in Nix devShells. Use `dnf` or Flatpak for additional GUI apps. Home
+Manager keeps dotfiles reproducible. After the first run, log out and back in.
+Subsequent updates use:
 
 ```bash
 home-manager switch --flake ".#$USER"
+```
+
+To update the Fedora-owned packages independently:
+
+```bash
+./script/fedora-desktop-packages.sh
 ```
 
 ### NixOS

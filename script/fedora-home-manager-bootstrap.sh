@@ -36,35 +36,8 @@ if [[ "$REPO_DIR" != "$EXPECTED_REPO_DIR" ]]; then
   fail "place this repository at $EXPECTED_REPO_DIR (current: $REPO_DIR)"
 fi
 
-printf 'Installing the Fedora-owned system and desktop layer...\n'
-sudo -v
-# Keep the graphical stack in Fedora.  In particular, kitty must use Fedora's
-# Mesa/GLVND drivers on a non-NixOS host; a Nix-built GUI application otherwise
-# needs an additional nixGL wrapper.  Project-specific compilers and tools are
-# intentionally left to Nix devShells/Home Manager.
-sudo dnf install -y \
-  curl \
-  fish \
-  git \
-  niri \
-  kitty \
-  nautilus \
-  loupe \
-  firefox \
-  thunderbird \
-  emacs \
-  gnome-text-editor \
-  gnome-tweaks \
-  gnome-calendar \
-  libreoffice \
-  mpv \
-  vlc \
-  inkscape \
-  pinta \
-  wl-clipboard \
-  playerctl \
-  brightnessctl \
-  ffmpegthumbnailer
+printf 'Installing the Fedora-owned system, desktop, and CLI layer...\n'
+"$SCRIPT_DIR/fedora-desktop-packages.sh"
 
 readonly FISH_PATH="$(command -v fish)"
 readonly LOGIN_SHELL="$(getent passwd "$CURRENT_USER" | cut -d: -f7)"

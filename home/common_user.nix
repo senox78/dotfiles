@@ -320,13 +320,16 @@ in
     targets.genericLinux.enable = true;
 
     # ===== packages =====
-    home.packages =
+    # A standalone Fedora host owns day-to-day packages through DNF.  Keep this
+    # list for NixOS, where it is part of the declarative system closure.
+    home.packages = lib.optionals (!standalone) (
       packages
-      ++ lib.optionals (!standalone) graphicalPackages
-      ++ lib.optionals (!standalone) [
+      ++ graphicalPackages
+      ++ [
         (lib.hiPrio emacsClient)
         emacsScratch
-      ];
+      ]
+    );
 
     home.sessionVariables = {
       NPM_CONFIG_PREFIX = npmGlobalDir;
