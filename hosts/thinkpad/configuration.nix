@@ -161,8 +161,8 @@ in
 
   # ===== swap =====
   # この機の swap は hardware-configuration.nix が生成する LUKS パーティション
-  # (luks-0432ea0c, 8.8GiB) のみ。initrd 中に解錠しないと起動時に
-  # /dev/mapper/luks-0432ea0c を待って固まるので、下の boot.initrd.luks.devices で
+  # (luks-86adca68) のみ。initrd 中に解錠しないと起動時に
+  # /dev/mapper/luks-86adca68 を待って固まるので、下の boot.initrd.luks.devices で
   # 登録する(/etc/nixos の gen 1 と同じ対応)。
   #
   # 2026-08-05: ここにあった /swapfile(34GiB) + boot.resumeDevice の組はデスクトップ機
@@ -170,8 +170,8 @@ in
   # /dev/mapper/luks-5c4ff8a1-… を resume= に指定していた。systemd initrd がその
   # デバイス待ちでハングし、gen 2/3 が起動不能になっていた(resume_offset も不要)。
   # swap は 8.8GiB で RAM(30GiB) に届かないため、この機では hibernate は使えない。
-  boot.initrd.luks.devices."luks-0432ea0c-d8a2-4750-9cb3-ce3229f53978" = {
-    device = "/dev/disk/by-uuid/0432ea0c-d8a2-4750-9cb3-ce3229f53978";
+  boot.initrd.luks.devices."luks-86adca68-ce6c-40cf-a0be-cf1432f342cd" = {
+    device = "/dev/disk/by-uuid/86adca68-ce6c-40cf-a0be-cf1432f342cd";
   };
 
   fileSystems."/mnt/bk_disk" = {
