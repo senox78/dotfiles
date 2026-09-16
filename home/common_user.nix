@@ -4,6 +4,7 @@
   inputs,
   lib,
   userName,
+  standalone ? false,
   ...
 }:
 let
@@ -169,12 +170,26 @@ let
     gnupg
     pinentry-qt
 
-    # ===== GUI applications =====
+    # ===== Applications that do not require the host graphical stack =====
     restic
-    kitty
-    spotify
     nerd-fonts.symbols-only
     nerd-fonts.jetbrains-mono
+    libnotify
+    wl-clipboard
+    wlrctl
+    bluetui
+    pulsemixer
+    brightnessctl
+    playerctl
+    ffmpegthumbnailer
+  ];
+
+  # NixOS owns its graphical stack, so keeping these in its closure is useful.
+  # On a generic Linux host, use the distro packages (or Flatpak) instead: they
+  # use the host's GL, portal, input-method, and desktop integration directly.
+  graphicalPackages = with pkgs; [
+    kitty
+    spotify
     google-chrome
     zen-browser
     zathura
@@ -193,17 +208,9 @@ let
     gnome-text-editor
     gnome-tweaks
     kdePackages.kdenlive
-    libnotify
     mpv
-    wl-clipboard
-    wlrctl
     ghostty
     hollywood
-    bluetui
-    pulsemixer
-    brightnessctl
-    playerctl
-    ffmpegthumbnailer
     vlc
     wiremix
     mpvpaper
@@ -217,7 +224,6 @@ let
     niri-scratchpad
     wooz
     gnome-calendar
-
     thunderbird
   ];
 
@@ -251,7 +257,7 @@ in
       '';
     };
 
-    programs.obs-studio = {
+    programs.obs-studio = lib.mkIf (!standalone) {
       enable = true;
 
       plugins = with pkgs.obs-studio-plugins; [
@@ -290,7 +296,7 @@ in
       extraConfig = "source-file ~/.config/tmux/.tmux.conf";
     };
 
-    programs.emacs = {
+    programs.emacs = lib.mkIf (!standalone) {
       enable = true;
       package = pkgs.emacs-pgtk;
       extraPackages = epkgs: [
@@ -299,7 +305,7 @@ in
         ]))
       ];
     };
-    services.emacs = {
+    services.emacs = lib.mkIf (!standalone) {
       enable = true;
       startWithUserSession = "graphical";
       defaultEditor = true;
@@ -314,10 +320,13 @@ in
     targets.genericLinux.enable = true;
 
     # ===== packages =====
-    home.packages = packages ++ [
-      (lib.hiPrio emacsClient)
-      emacsScratch
-    ];
+    home.packages =
+      packages
+      ++ lib.optionals (!standalone) graphicalPackages
+      ++ lib.optionals (!standalone) [
+        (lib.hiPrio emacsClient)
+        emacsScratch
+      ];
 
     home.sessionVariables = {
       NPM_CONFIG_PREFIX = npmGlobalDir;
@@ -440,7 +449,7 @@ in
       };
     };
 
-    xdg.desktopEntries.emacs = {
+    xdg.desktopEntries.emacs = lib.mkIf (!standalone) {
       name = "Emacs";
       genericName = "Text Editor";
       comment = "Edit text with the Emacs daemon";

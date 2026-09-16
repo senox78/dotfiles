@@ -97,6 +97,7 @@
           ];
           extraSpecialArgs = {
             inherit inputs userName;
+            standalone = true;
           };
         };
     in
@@ -145,6 +146,7 @@
             home-manager.extraSpecialArgs = {
               inherit inputs;
               userName = userNames.thinkpad;
+              standalone = false;
             };
             home-manager.sharedModules = [ (mkGitSigningConfig gitSigningKeys.thinkpad) ];
             home-manager.users.${userNames.thinkpad} = import ./home/seli.nix;
@@ -182,6 +184,7 @@
             home-manager.extraSpecialArgs = {
               inherit inputs;
               userName = userNames.desktop;
+              standalone = false;
             };
             home-manager.sharedModules = [ (mkGitSigningConfig gitSigningKeys.desktop) ];
             home-manager.users.${userNames.desktop} = import ./home/seli.nix;
