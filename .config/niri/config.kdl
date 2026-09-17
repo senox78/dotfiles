@@ -37,6 +37,11 @@ layer-rule {
     place-within-backdrop true
 }
 
+layer-rule {
+    match namespace="^noctalia-backdrop"
+    place-within-backdrop true
+}
+
 cursor {
     xcursor-theme "Bibata-Modern-Ice"
     xcursor-size 24
@@ -65,6 +70,8 @@ spawn-sh-at-startup "systemctl --user restart xdg-desktop-portal.service"
 // niri の IPC ソケット切断時に CPU を食い尽くす既知バグ
 // (https://github.com/probeldev/niri-float-sticky/issues/12) を回避するため
 // spawn-at-startup では起動しない。
+spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
+spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
 
 input {
 //    focus-follows-mouse

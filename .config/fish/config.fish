@@ -68,9 +68,9 @@ set -gx OLLAMA_DEBUG 1
 set -gx OLLAMA_HOST 0.0.0.0:11434
 set -gx LIBVIRT_DEFAULT_URI qemu:///system
 # home-manager が zsh には session vars で渡している分 (fish は HM 非管理)
-set -gx CC clang
-set -gx CXX clang++
-set -gx LD lld
+# set -gx CC clang
+# set -gx CXX clang++
+# set -gx LD lld
 set -gx ZIGGITY_CONFIG "$HOME/.config/ziggity/config.ini"
 # npm
 fish_add_path -g $HOME/.npm-global/bin
