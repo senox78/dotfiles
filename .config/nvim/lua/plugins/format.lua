@@ -10,6 +10,7 @@ return {
           rust = { "rustfmt", lsp_format = "fallback" },
           go = { "gofmt" },
           lua = { "stylua" },
+          luau = { "stylua" },
           json = { "biome" },
           jsonc = { "biome" },
           sh = { "shfmt" },
@@ -21,6 +22,7 @@ return {
           javascript = { "biome" },
           javascriptreact = { "biome" },
           ocaml = { "ocamlformat" },
+          python = { "ruff" }
         },
 
         formatters = {
@@ -51,6 +53,11 @@ return {
               "array_auto_collapse=false",
             },
           },
+          ruff = {
+            append_args = {
+              "format"
+            }
+          }
         },
 
         format_on_save = {

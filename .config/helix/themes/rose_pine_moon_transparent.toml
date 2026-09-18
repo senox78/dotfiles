@@ -1,8 +1,0 @@
-inherits = "rose_pine_moon"
-
-"ui.background" = {}
-"ui.background.separator" = {}
-# "ui.virtual.indent-guide" = { fg = "#404040" }
-"ui.virtual.whitespace" = { fg = "#606060" }
-
-"ui.virtual.indent-guide" = { fg = "#88C0D0" }

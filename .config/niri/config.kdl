@@ -54,24 +54,16 @@ hotkey-overlay {
 gestures {
     hot-corners {
         off
-    
-}
+    }
 }
 
 spawn-sh-at-startup "dbus-update-activation-environment --systemd --all"
-// NIRI_SOCKET は niri が子プロセスにしか渡さないので、systemd user サービス
-// (niri-float-sticky など) が使えるよう manager 環境へ import する。
+
 spawn-sh-at-startup "systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP NIRI_SOCKET"
-// Ensure the desktop portal re-reads XDG_CURRENT_DESKTOP=niri on every niri
-// start; otherwise a long-lived xdg-desktop-portal.service can keep routing
-// ScreenCast to xdg-desktop-portal-hyprland (unsupported under niri, crashes).
 spawn-sh-at-startup "systemctl --user restart xdg-desktop-portal.service"
-// niri-float-sticky は systemd user サービス (home/common_user.nix) として起動。
-// niri の IPC ソケット切断時に CPU を食い尽くす既知バグ
-// (https://github.com/probeldev/niri-float-sticky/issues/12) を回避するため
-// spawn-at-startup では起動しない。
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
+spawn-at-startup "$HOME/dotfiles/script/launchtools.sh"
 
 input {
 //    focus-follows-mouse
@@ -331,7 +323,8 @@ binds {
     Super+M { quit; }
     Super+E { spawn-sh "emacs $HOME/org"; }
     Super+V { toggle-window-floating; }
-    Super+D { spawn-sh "rofi -show drun"; }
+    // Super+D { spawn-sh "rofi -show drun"; }
+    Super+D { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
     Super+C { spawn-sh "swaync-client --toggle-panel"; }
     // Toggle a dedicated floating Kitty. The other two bindings retain the
     // dedicated Emacs scratchpad.
@@ -437,9 +430,11 @@ binds {
     // 長押しで KEY_SCREENLOCK を送ってくる (modules/desktop.nix)。実際のロックは
     // spawn-at-startup した hypridle の lock_cmd 経由。
     XF86ScreenSaver { spawn-sh "loginctl lock-session"; }
-    Super+Shift+V {
-        spawn-sh "cliphist list | rofi -dmenu -p ' ' | cliphist decode | wl-copy"
-    }
+    // Super+Shift+V {
+    //     spawn-sh "cliphist list | rofi -dmenu -p ' ' | cliphist decode | wl-copy"
+    // }
+
+    Super+Shift+V { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
 
     // --- wallpapers ---
     Super+W { spawn "wlmstr" "next" "seq"; }

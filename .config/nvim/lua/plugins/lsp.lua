@@ -328,6 +328,13 @@ return {
       })
       vim.lsp.enable("lua_ls")
 
+      vim.lsp.config("luau_lsp", {
+        capabilities = capabilities,
+        on_attach = on_attach,
+      })
+
+      vim.lsp.enable("luau_lsp")
+
       vim.lsp.config("gleam", {
         capabilities = capabilities,
         on_attach = on_attach,

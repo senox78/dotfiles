@@ -1,0 +1,46 @@
+{
+  "exclusionRules": [
+    {
+      "passKeys": "",
+      "pattern": "https?://claude.ai/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://discord.com/*"
+    },
+    {
+      "passKeys": "/",
+      "pattern": "https?://github.com/*"
+    },
+    {
+      "passKeys": "i",
+      "pattern": "https?://chatgpt.com/*"
+    },
+    {
+      "passKeys": "jklghnmsrtb<Esc>o",
+      "pattern": "https?://x.com/*"
+    },
+    {
+      "passKeys": "/",
+      "pattern": "https?://www.google.com/*"
+    },
+    {
+      "passKeys": "/",
+      "pattern": "https?://100.101.115.120:4321/*"
+    },
+    {
+      "passKeys": "",
+      "pattern": "https?://typing-level-zero.pages.dev/*"
+    },
+    {
+      "passKeys": "/",
+      "pattern": "https?://100.101.115.120:4326/*"
+    },
+    {
+      "passKeys": "/",
+      "pattern": "https?://senox.cc/*"
+    }
+  ],
+  "newTabDestination": "browserNewTabPage",
+  "settingsVersion": "2.4.2"
+}

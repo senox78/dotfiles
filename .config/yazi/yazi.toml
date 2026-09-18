@@ -32,8 +32,14 @@ html = [
   { run = "firefox %s", orphan = true, desc = "Firefox" },
 ]
 
+unzip = [
+  { run = '''sh -c 'p=$1; unzip -d "${p%.zip}" -- "$p"' sh %s1''', block = true, desc = "Extract ZIP with unzip" },
+]
+
 [open]
 prepend_rules = [
+  { url = "*.zip", use = "unzip" },
+  { mime = "application/zip", use = "unzip" },
   { mime = "application/pdf", use = "pdf" },
   { mime = "image/*", use = "image" },
   { mime = "text/html", use = "html" },

@@ -2,10 +2,6 @@
 #  ╠╣  ║ ╚═╗ ╠═╣ ║╣  ╠╦╝
 #  ╚   ╩ ╚═╝ ╩ ╩ ╚═╝ ╩╚═
 
-# Fedora などの standalone Home Manager 環境では、NixOS のログイン環境が
-# /nix とユーザープロファイルを PATH に追加してくれない。Nix installer が
-# fish 用スクリプトを提供する場合はそれを読み、Home Manager の profile は
-# installer の種類にかかわらず明示的に追加する。
 if test -r /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish
     source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.fish
 else
@@ -28,6 +24,7 @@ if status is-interactive
     set -g fish_history_max 1000000
     set -g fish_greeting
     set -U fish_ambiguous_case_sensitive
+    set -U fish_prompt_pwd_dir_length 0
 
     # direnv
     if type -q direnv
@@ -213,8 +210,7 @@ abbr -a lg lazygit
 abbr -a z ziggity
 abbr -a rg 'rg --hidden'
 abbr -a y yazi
-abbr -a hxd 'hx .'
-abbr -a h 'herdr'
+abbr -a h 'hx .'
 abbr -a mi mediainfo
 abbr -a n 'nvim .'
 abbr -a e 'emacs -nw .'
@@ -280,6 +276,12 @@ abbr -a mh 'moon check'
 #gleam
 abbr -a gb 'gleam build'
 abbr -a gr 'gleam run'
+
+function blog
+  cd ~/ghq/github.com/senox78/senox/
+  nix develop -c $SHELL
+  # ./new
+end
 
 # ╔╗╔ ╦ ═╗ ╦
 # ║║║ ║ ╔╩╦╝

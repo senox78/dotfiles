@@ -1,5 +1,3 @@
-# .zshrc の PROMPT (remote_info / nix_shell_prompt / git_prompt / face_prompt)
-# と同じ見た目に揃えている。
 function fish_prompt
     set -l last_status $status
     set -l yellow (set_color yellow)
@@ -54,8 +52,6 @@ function fish_prompt
         echo -n -s "(" $green $branch $normal "|" $status_icon $remote_info ")"
     end
 
-    # fish 独自: 5 秒を超えたコマンドの実行時間
-    # 120 秒を超えたら分表示 (例: 2m30s)、120 分を超えたら時間表示 (例: 2h5m)
     if test -n "$CMD_DURATION"; and test $CMD_DURATION -gt 5000
         set -l secs (math -s0 $CMD_DURATION / 1000)
         set -l mins (math -s0 $secs / 60)
