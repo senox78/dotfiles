@@ -3,6 +3,7 @@
 [user]
 	name = senox78
   email = senox78.am2@gmail.com
+	signingkey = 0xCC8659005EEB10EA
 [include]
 	path = ~/.config/git-signing.conf
 [core]
@@ -39,4 +40,7 @@
 [commit]
 	gpgsign = true
 [tag]
-	gpgSign = true
+	gpgsign = true
+[gpg]
+	format = openpgp
+	program = gpg

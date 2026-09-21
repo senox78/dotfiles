@@ -190,6 +190,9 @@ let
   # On a generic Linux host, use the distro packages (or Flatpak) instead: they
   # use the host's GL, portal, input-method, and desktop integration directly.
   graphicalPackages = with pkgs; [
+    # The user service uses an absolute store path, but interactive commands
+    # still need the package in the user profile.
+    noctalia
     kitty
     spotify
     google-chrome
@@ -383,10 +386,6 @@ in
         source = mkConfigLink "kitty";
         recursive = false;
       };
-      "ghostty" = {
-        source = mkConfigLink "ghostty";
-        recursive = false;
-      };
       "git" = {
         source = mkConfigLink "git";
         recursive = false;
@@ -399,28 +398,12 @@ in
         source = mkConfigLink "vim";
         recursive = false;
       };
-      "nix" = {
-        source = mkConfigLink "nix";
-        recursive = false;
-      };
       "rofi" = {
         source = mkConfigLink "rofi";
         recursive = false;
       };
-      "sheldon" = {
-        source = mkConfigLink "sheldon";
-        recursive = false;
-      };
-      "zsh-abbr" = {
-        source = mkConfigLink "zsh-abbr";
-        recursive = false;
-      };
       "fish" = {
         source = mkConfigLink "fish";
-        recursive = false;
-      };
-      "btop" = {
-        source = mkConfigLink "btop";
         recursive = false;
       };
       "ziggity" = {
@@ -446,14 +429,6 @@ in
       };
       "noctalia" = {
         source = mkConfigLink "noctalia";
-        recursive = false;
-      };
-      "nixpkgs" = {
-        source = mkConfigLink "nixpkgs";
-        recursive = false;
-      };
-      "herdr" = {
-        source = mkConfigLink "herdr";
         recursive = false;
       };
       "wlmstr" = {
