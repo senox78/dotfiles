@@ -1,7 +1,0 @@
-[awww]
-args = [
-    "--transition-type",
-    "wave",
-    "--transition-duration",
-    "0.5",
-]

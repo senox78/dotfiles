@@ -31,12 +31,6 @@ overview {
   backdrop-color "#777"
 }
 
-// Keep awww stationary and visible behind the zoomed-out workspaces.
-layer-rule {
-    match namespace="^awww-daemon$"
-    place-within-backdrop true
-}
-
 layer-rule {
     match namespace="^noctalia-backdrop"
     place-within-backdrop true
@@ -63,7 +57,6 @@ spawn-sh-at-startup "systemctl --user import-environment WAYLAND_DISPLAY XDG_CUR
 spawn-sh-at-startup "systemctl --user restart xdg-desktop-portal.service"
 spawn-at-startup "wl-paste" "--type" "text" "--watch" "cliphist" "store"
 spawn-at-startup "wl-paste" "--type" "image" "--watch" "cliphist" "store"
-spawn-at-startup "$HOME/dotfiles/script/launchtools.sh"
 
 input {
 //    focus-follows-mouse
@@ -299,53 +292,34 @@ window-rule {
     }
 }
 
-// lid の開閉は logind に一本化した (hosts/desktop/configuration.nix の
-// HandleLidSwitch* を参照)。handle_lid.sh は既に存在しないので switch-events
-// ごと削除した。同じ注意書きが .config/hypr/config/binds.lua にもある。
-
-// niri-scratchpad moves hidden scratchpad windows into this workspace.
-// Named workspaces initially appear in declaration order, so keep stash first.
 workspace "stash" { }
 
-// External monitor (DP-1) when available; otherwise eDP-1.
-// Named workspaces retain their original output, so chats returns to DP-1 on reconnect.
 workspace "chats" {
     open-on-output "DP-1"
-}
-
-// Discord (desktop app) は常に chats に開く
-window-rule {
-    match app-id=r#"^discord$"#
-    open-on-workspace "chats"
 }
 
 binds {
     Super+S { focus-workspace "chats"; }
     Super+Shift+S { move-window-to-workspace "chats"; }
 
-    // --- apps (match hypr binds.lua) ---
     Super+Q repeat=false { close-window; }
     Super+T { spawn "kitty"; }
     Super+M { quit; }
     Super+E { spawn-sh "emacs $HOME/org"; }
     Super+V { toggle-window-floating; }
-    // Super+D { spawn-sh "rofi -show drun"; }
     Super+D { spawn "noctalia" "msg" "panel-toggle" "launcher"; }
-    Super+C { spawn-sh "swaync-client --toggle-panel"; }
+    Super+C { spawn "noctalia" "msg" "panel-toggle" "control-center"; }
     // Toggle a dedicated floating Kitty. The other two bindings retain the
     // dedicated Emacs scratchpad.
     Super+Backslash { spawn "niri-scratchpad" "target" "--spawn" "kitty --class=scratchpad-kitty" "appid" "scratchpad-kitty"; }
     Super+bracketleft { spawn "niri-scratchpad" "target" "--spawn" "emacs-scratch" "title" "Scratchpad Emacs"; }
     Super+bracketright { spawn "niri-scratchpad" "target" "--spawn" "emacs-scratch" "title" "Scratchpad Emacs"; }
     Super+shift+D { spawn-sh "$HOME/dotfiles/script/niri_views.sh"; }
-    // Super+Shift+E { spawn-sh "$HOME/dotfiles/script/logout.py"; }
     Super+Shift+F { fullscreen-window; }
     Super+O repeat=false { toggle-overview; }
     Super+Alt+Z repeat=false { spawn "wooz" "--zoom-in" "50%" "--mouse-track"; }
-    // Super+C { spawn "noctalia-shell" "ipc" "call" "notifications" "toggleHistory"; }
+    Super+Shift+V { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
 
-    // maximize: Shift+F fills the column width (keeps gaps/border),
-    // Ctrl+F expands the window edge-to-edge (no gaps/border)
     Super+F { maximize-column; }
     Super+Ctrl+F { maximize-window-to-edges; }
 
@@ -354,34 +328,12 @@ binds {
     Super+Right { focus-column-right; }
     Super+Up { focus-window-up; }
     Super+Down { focus-window-down; }
-    Super+H { focus-column-left; }
-    Super+L { focus-column-right; }
-    // scroll to move focus to the next/previous column
-    Super+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
-    Super+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
-
-    // jump to first/last column (head/tail)
-    Super+Home { focus-column-first; }
-    Super+End { focus-column-last; }
-
-    // --- monitors (stacked vertically: DP-1 top, eDP-1 bottom) ---
-    Super+Ctrl+J { focus-monitor-down; }
-    Super+Ctrl+K { focus-monitor-up; }
-    Super+Ctrl+L { focus-monitor-right; }
-    Super+Ctrl+H { focus-monitor-left; }
-    Super+Ctrl+Home { move-column-to-first; }
-    Super+Ctrl+End { move-column-to-last; }
-
-    // --- workspaces ---
-    Super+Ctrl+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
-    Super+Ctrl+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
-
-    Super+grave { focus-workspace-down; }
-    Super+Shift+grave { focus-workspace-up; }
     Super+J { focus-workspace-down; }
     Super+K { focus-workspace-up; }
-    Super+Shift+J { move-window-to-workspace-down; }
-    Super+Shift+K { move-window-to-workspace-up; }
+    Super+H { focus-column-left; }
+    Super+L { focus-column-right; }
+    Super+WheelScrollDown cooldown-ms=150 { focus-workspace-down; }
+    Super+WheelScrollUp cooldown-ms=150 { focus-workspace-up; }
 
     Super+1 { focus-workspace 1; }
     Super+2 { focus-workspace 2; }
@@ -394,6 +346,16 @@ binds {
     Super+9 { focus-workspace 9; }
     Super+0 { focus-workspace 10; }
 
+    // jump to first/last column (head/tail)
+    Super+Home { focus-column-first; }
+    Super+End { focus-column-last; }
+
+    // --- moves ---
+    Super+Shift+J { move-window-to-workspace-down; }
+    Super+Shift+K { move-window-to-workspace-up; }
+    Super+Shift+H { swap-window-left; }
+    Super+Shift+L { swap-window-right; }
+
     Super+Shift+1 { move-window-to-workspace 1; }
     Super+Shift+2 { move-window-to-workspace 2; }
     Super+Shift+3 { move-window-to-workspace 3; }
@@ -404,48 +366,38 @@ binds {
     Super+Shift+8 { move-window-to-workspace 8; }
     Super+Shift+9 { move-window-to-workspace 9; }
     Super+Shift+0 { move-window-to-workspace 10; }
-
     Super+Shift+M { spawn-sh "$HOME/dotfiles/script/move_to_display.sh"; }
-    
-    // --- swap / layout ---
-    Super+Shift+H { swap-window-left; }
-    Super+Shift+L { swap-window-right; }
 
-    // resize: niri has no submaps; Super+Ctrl+HJKL mirrors hypr resize-mode keys
+    // --- monitors (stacked vertically: DP-1 top, eDP-1 bottom) ---
+    Super+Ctrl+J { focus-monitor-down; }
+    Super+Ctrl+K { focus-monitor-up; }
+    Super+Ctrl+L { focus-monitor-right; }
+    Super+Ctrl+H { focus-monitor-left; }
+    Super+Ctrl+Home { move-column-to-first; }
+    Super+Ctrl+End { move-column-to-last; }
+
+    // resize
+    Super+R { switch-preset-column-width; }
+    Super+Shift+R { switch-preset-column-width-back; }
+
     Alt+Shift+H repeat=true { set-column-width "-10"; }
     Alt+Shift+L repeat=true { set-column-width "10"; }
     Super+Ctrl+R repeat=false { reset-window-height; }
 
-    // cycle through preset column-width "templates" (see layout.preset-column-widths)
-    Super+R { switch-preset-column-width; }
-    Super+Shift+R { switch-preset-column-width-back; }
-
     // --- screenshots (native niri) ---
-    Print repeat=false { screenshot-window; }
-    // Flatten the focused window's transparent pixels onto a neutral gray.
-    // Super+P repeat=false { spawn-sh "$HOME/dotfiles/script/niri_window_screenshot.sh"; }
     Super+P repeat=false { screenshot-window; }
     Ctrl+Shift+S repeat=false { screenshot; }
-    Super+Print repeat=false { screenshot-screen; }
 
     // --- utilities ---
     Super+Shift+P { spawn-sh "$HOME/dotfiles/script/cmd_p.py"; }
     Super+Shift+E { spawn-sh "$HOME/dotfiles/script/logout.py"; }
 
-    // Delete 長押し = ロックボタン（hypr の binds.lua と同じ）。keyd が 500ms
-    // 長押しで KEY_SCREENLOCK を送ってくる (modules/desktop.nix)。実際のロックは
-    // spawn-at-startup した hypridle の lock_cmd 経由。
     XF86ScreenSaver { spawn-sh "loginctl lock-session"; }
-    // Super+Shift+V {
-    //     spawn-sh "cliphist list | rofi -dmenu -p ' ' | cliphist decode | wl-copy"
-    // }
-
-    Super+Shift+V { spawn "noctalia" "msg" "panel-toggle" "clipboard"; }
 
     // --- wallpapers ---
-    Super+W { spawn "wlmstr" "next" "seq"; }
-    Super+Shift+W { spawn "wlmstr" "next" "pre"; }
-    Alt+W {spawn-sh "$HOME/dotfiles/script/wallpaper_selcetor.sh $HOME/Pictures/wallpapers"; }
+    Super+W { spawn "noctalia" "msg" "wallpaper-next"; }
+    Super+Shift+W { spawn "noctalia" "msg" "wallpaper-previous"; }
+    Alt+W { spawn "noctalia" "msg" "panel-toggle" "wallpaper"; }
 
     // --- media / brightness ---
     XF86AudioRaiseVolume allow-when-locked=true repeat=true {
@@ -477,9 +429,4 @@ binds {
     Alt+Minus repeat=true { spawn-sh "wpctl set-volume @DEFAULT_AUDIO_SINK@ 3%-"; }
 
     Super+Escape allow-inhibiting=false { toggle-keyboard-shortcuts-inhibit; }
-
-    // Alt+H repeat=true { spawn-sh "$HOME/dotfiles/script/scroll.sh left"; }
-    // Alt+K repeat=true { spawn-sh "$HOME/dotfiles/script/scroll.sh up"; }
-    // Alt+J repeat=true { spawn-sh "$HOME/dotfiles/script/scroll.sh down"; }
-    // Alt+L repeat=true { spawn-sh "$HOME/dotfiles/script/scroll.sh right"; }
 }

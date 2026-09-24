@@ -4,8 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
 
-    firefox-nightly.url = "github:nix-community/flake-firefox-nightly";
-
     nix-hazkey = {
       url = "github:aster-void/nix-hazkey/4f791a241963f6804420d69613c25c6d25610e73";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -21,11 +19,6 @@
 
     herdr = {
       url = "github:ogulcancelik/herdr/v0.7.5";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    wlmstr = {
-      url = "github:Uliboooo/wlmstr";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -50,6 +43,11 @@
 
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    helium-flake = {
+      url = "github:oxcl/nix-flake-helium-browser";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };

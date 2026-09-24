@@ -15,14 +15,11 @@ script = home + "/dotfiles/script/"
 slide_dev = home + "/Develop/linux_slide/"
 
 cmds = {
-    "󰸉 Turn on wallpaper cycle":    ["bash", script + "wallpaper_cycle_helper.sh", "enable"],
-    "󰸉 Turn off wallpaper cycle":   ["bash", script + "wallpaper_cycle_helper.sh", "disable"],
-    "󰸉 Status of wallpaper cycle":  ["bash", script + "wallpaper_cycle_helper.sh", "status"],
     "󰗽 Logout":                     ["hyprctl", "dispatch", "hl.dsp.exit()"],
     "󰜉 Reboot":                     ["reboot"],
     " Lock":                       ["hyprlock"],
     "󰔎 Toggle theme light-dark":    ["bash", script + "toggle_theme.sh"],
-    "󰸉 Random wallpaper":           ["wlmstr", "next", "rnd"],
+    "󰸉 Random wallpaper":           ["noctalia", "msg", "wallpaper-random"],
     "󱎐 Launch white in kitty":      ["kitty", "--config", home + "/dotfiles/.config/kitty/light.conf"],
 }
 

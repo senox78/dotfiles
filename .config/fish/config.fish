@@ -290,6 +290,7 @@ end
 abbr -a nd 'nix develop -c $SHELL'
 abbr -a nbuild 'sudo nixos-rebuild switch --flake .#(rebuild_host)'
 abbr -a update 'nix flake update'
+abbr -a ns 'nix search nixpkgs'
 
 function rebuild_host
     set -l cur (hostname)

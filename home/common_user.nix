@@ -15,12 +15,12 @@ let
 
   system = pkgs.stdenv.hostPlatform.system;
 
-  wlmstr = inputs.wlmstr.packages.${system}.default;
   zathura-gui = inputs.zathura-gui.packages.${system}.default;
   niri-float-sticky = inputs.niri-float-sticky.packages.${system}.default;
   niri-scratchpad = inputs.niri-scratchpad.packages.${system}.default;
-  firefox-nightly = inputs.firefox-nightly.packages.${system}.firefox-nightly-bin;
   zen-browser = inputs.zen-browser.packages.${system}.zen-browser;
+  helium = inputs.helium-flake.packages.${system}.helium;
+
   emacsClient = pkgs.writeShellScriptBin "emacs" ''
     exec ${lib.getExe' pkgs.emacs-pgtk "emacsclient"} --create-frame "$@"
   '';
@@ -196,6 +196,7 @@ let
     kitty
     spotify
     google-chrome
+    helium
     zen-browser
     zathura
     sioyek
@@ -207,7 +208,6 @@ let
     showtime
     libreoffice
     firefox
-    firefox-nightly
     discord
     vesktop
     gnome-text-editor
@@ -219,7 +219,6 @@ let
     vlc
     wiremix
     mpvpaper
-    wlmstr
     zathura-gui
     chromium
     geeqie
@@ -414,7 +413,6 @@ in
         source = mkConfigLink "opencode";
         recursive = false;
       };
-      # Wayland/Hyprland 系の Linux-only configs
       "hypr" = {
         source = mkConfigLink "hypr";
         recursive = false;
@@ -429,10 +427,6 @@ in
       };
       "noctalia" = {
         source = mkConfigLink "noctalia";
-        recursive = false;
-      };
-      "wlmstr" = {
-        source = mkConfigLink "wlmstr";
         recursive = false;
       };
     };
@@ -497,33 +491,8 @@ in
         StandardOutput = "journal";
         StandardError = "journal";
       };
-    };
 
-    systemd.user.services.cycle_wallpaper = {
-      Unit.Description = "wallpaper cycle by awww";
-
-      Service = {
-        Type = "oneshot";
-        ExecStart = lib.escapeShellArgs [
-          (lib.getExe wlmstr)
-          "next"
-          "seq"
-        ];
-        StandardOutput = "journal";
-        StandardError = "journal";
-      };
-    };
-
-    systemd.user.timers.cycle_wallpaper = {
-      Unit.Description = "Change wallpaper every 15 minutes";
-
-      Timer = {
-        OnBootSec = "1min";
-        OnCalendar = "*-*-* *:00,15,30,45:00";
-        Persistent = false;
-      };
-
-      Install.WantedBy = [ "timers.target" ];
+      Install.WantedBy = [ "graphical-session.target" ];
     };
 
     systemd.user.services.cliphist-clean = {

@@ -1,6 +1,6 @@
 [backdrop]
 blur_intensity = 0.0
-enabled = true
+enabled = false
 tint_intensity = 0.0
 
 [bar.default]
