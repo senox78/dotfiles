@@ -68,7 +68,7 @@
 
       gitSigningKeys = {
         desktop = "B89051A56543D9A9781C02CFCC8659005EEB10EA";
-        thinkpad = "7AD0F6CEBAE48BAE0D48F9BE839233C3BA088297";
+        thinkpad = "B89051A56543D9A9781C02CFCC8659005EEB10EA";
       };
 
       mkGitSigningConfig = signingKey: {

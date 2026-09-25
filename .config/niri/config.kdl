@@ -93,6 +93,12 @@ output "DP-1" {
     position x=0 y=0
 }
 
+output "eDP-1" {
+    mode "1920x1200"
+    scale 1.0
+    position x=-1920 y=240
+}
+
 output "DP-3" {
     mode "1024x768"
     scale 1.0

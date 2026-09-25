@@ -202,6 +202,7 @@ let
     sioyek
     pinta
     inkscape
+    gimp
     nautilus
     loupe
     clapper
@@ -209,6 +210,7 @@ let
     libreoffice
     firefox
     discord
+    slack
     vesktop
     gnome-text-editor
     gnome-tweaks
