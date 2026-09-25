@@ -957,7 +957,9 @@ identifiers."
 (require 'vc-git)
 
 (setq org-default-notes-file "~/org/inbox.org")
-(setq org-agenda-files (directory-files-recursively org-directory "\\.org$"))
+(setq org-agenda-files
+      (when (file-directory-p org-directory)
+        (directory-files-recursively org-directory "\\.org$")))
 (setq org-todo-keywords
       '((sequence "TODO(t)" "WAIT(w)" "|" "NOTING(n)" "DONE(d)" "CANCELLED(c)")))
 

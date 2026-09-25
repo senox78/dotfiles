@@ -41,7 +41,7 @@ let
     text = ''
       org_dir="${config.home.homeDirectory}/org"
 
-      if [[ ! -d "$org_dir/.git" ]]; then
+      if [[ ! -e "$org_dir/.git" ]]; then
         echo "org-git-sync: $org_dir is not a Git repository" >&2
         exit 1
       fi
@@ -543,7 +543,10 @@ in
     };
 
     systemd.user.services.org-git-sync = {
-      Unit.Description = "Pull and commit changes in the org-mode repository";
+      Unit = {
+        Description = "Pull and commit changes in the org-mode repository";
+        ConditionPathExists = "${config.home.homeDirectory}/org/.git";
+      };
 
       Service = {
         Type = "oneshot";
