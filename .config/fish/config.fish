@@ -323,3 +323,5 @@ function rebuild
         home-manager switch --flake ".#$flake_user"
     end
 end
+
+abbr -a org 'cd $HOME/org && nvim .'
